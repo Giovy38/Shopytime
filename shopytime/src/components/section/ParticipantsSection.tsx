@@ -19,8 +19,16 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
     }, [participants, onParticipantsChange]);
 
     const onAddParticipant = () => {
-        if (inputValue.trim()) {
-            setParticipants([...participants, inputValue.trim()]);
+        const trimmedValue = inputValue.trim();
+        if (trimmedValue) {
+            if (participants.some(p => p.toLowerCase() === trimmedValue.toLowerCase())) {
+                const capitalizedName = trimmedValue.charAt(0).toUpperCase() + trimmedValue.slice(1);
+                setWarningMessage(`"${capitalizedName}" è già presente nella lista`);
+                setShowWarning(true);
+                setTimeout(() => setShowWarning(false), 3000);
+                return;
+            }
+            setParticipants([...participants, trimmedValue]);
             setInputValue("");
         }
     }
