@@ -16,24 +16,31 @@ interface MarketSectionProps {
     marketName: string;
     buyerName: string;
     participants: string[];
+    products: Product[];
     onRemove?: () => void;
     onBuyerChange?: (newBuyer: string) => void;
+    onAddProduct?: (product: Product) => void;
+    onRemoveProduct?: (productIndex: number) => void;
+    onQuantityChange?: (productIndex: number, newQuantity: number) => void;
 }
 
-export function MarketSection({ marketName, buyerName, participants, onRemove, onBuyerChange }: MarketSectionProps) {
-    const [products, setProducts] = useState<Product[]>([]);
+export function MarketSection({
+    marketName,
+    buyerName,
+    participants,
+    products,
+    onRemove,
+    onBuyerChange,
+    onAddProduct,
+    onRemoveProduct,
+    onQuantityChange
+}: MarketSectionProps) {
     const [showForm, setShowForm] = useState(false);
     const [showBuyerSelect, setShowBuyerSelect] = useState(false);
 
     const handleAddProduct = (product: Product) => {
-        setProducts([...products, product]);
+        onAddProduct?.(product);
         setShowForm(false);
-    };
-
-    const handleQuantityChange = (index: number, newQuantity: number) => {
-        setProducts(products.map((product, i) =>
-            i === index ? { ...product, quantity: newQuantity } : product
-        ));
     };
 
     const handleBuyerChange = (newBuyer: string) => {
@@ -89,10 +96,8 @@ export function MarketSection({ marketName, buyerName, participants, onRemove, o
                                 productName={product.name}
                                 price={product.price}
                                 initialQuantity={product.quantity}
-                                onRemove={() => {
-                                    setProducts(products.filter((_, i) => i !== index));
-                                }}
-                                onQuantityChange={(newQuantity) => handleQuantityChange(index, newQuantity)}
+                                onRemove={() => onRemoveProduct?.(index)}
+                                onQuantityChange={(newQuantity) => onQuantityChange?.(index, newQuantity)}
                             />
                         ))
                     )}
