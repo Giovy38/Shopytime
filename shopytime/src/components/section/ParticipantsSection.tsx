@@ -57,7 +57,7 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
                     />
                     <Button onClick={onAddParticipant}>Aggiungi nome</Button>
                 </div>
-                <div className='flex flex-wrap justify-center items-center p-3 gap-2 bg-default-third'>
+                <div className='flex flex-wrap justify-center items-center p-3 gap-2 '>
                     {participants.length === 0 ? (
                         <div className="text-center text-lg italic ">Ancora nessun partecipante</div>
                     ) : (

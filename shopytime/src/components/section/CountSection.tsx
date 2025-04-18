@@ -31,7 +31,7 @@ export function CountSection({ markets, participants }: CountSectionProps) {
         <div className="space-y-6">
             <div className="relative">
                 <div className="absolute inset-0 translate-x-1 translate-y-1 bg-default-secondary" />
-                <div className="relative flex flex-col gap-3 p-5 bg-default-third border-2 border-default-secondary">
+                <div className="relative flex flex-col gap-3 p-5 bg-primary-color border-2 border-default-secondary">
                     <h2 className="text-2xl font-bold mb-2">Calcolo Quote</h2>
                     <div className="flex items-center justify-between border-b-2 border-default-secondary">
                         <span className="font-medium">Quota per partecipante:</span>

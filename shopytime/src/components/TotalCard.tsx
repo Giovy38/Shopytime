@@ -18,7 +18,7 @@ export function TotalCard({
             <div className="relative p-5 bg-default-third border-2 border-black ">
                 <h3 className="text-xl font-bold mb-2 capitalize">{name}</h3>
                 <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between bg-primary-color-hover px-2">
+                    <div className="flex items-center justify-between bg-primary-color px-2">
                         <span className="font-medium">Speso:</span>
                         <div className="w-24 px-2 py-1 font-bold">
                             €{spent.toFixed(2)}

@@ -83,29 +83,30 @@ function App() {
               <Button variant='primary' onClick={() => setShowNewMarketForm(true)}>Aggiungi negozio</Button>
             </div>
           )}
-          {markets.map((market, index) => (
+
+          {showNewMarketForm && (
+            <NewMarketForm
+              onConfirm={handleAddMarket}
+              onCancel={() => setShowNewMarketForm(false)}
+              participants={participants}
+            />
+          )}
+
+          {[...markets].reverse().map((market, index) => (
             <MarketSection
               key={index}
               marketName={market.name}
               buyerName={market.buyerName}
               participants={participants}
               products={market.products}
-              onRemove={() => handleRemoveMarket(index)}
-              onBuyerChange={(newBuyer) => handleBuyerChange(index, newBuyer)}
-              onAddProduct={(product) => handleAddProduct(index, product)}
-              onRemoveProduct={(productIndex) => handleRemoveProduct(index, productIndex)}
-              onQuantityChange={(productIndex, newQuantity) => handleQuantityChange(index, productIndex, newQuantity)}
+              onRemove={() => handleRemoveMarket(markets.length - 1 - index)}
+              onBuyerChange={(newBuyer) => handleBuyerChange(markets.length - 1 - index, newBuyer)}
+              onAddProduct={(product) => handleAddProduct(markets.length - 1 - index, product)}
+              onRemoveProduct={(productIndex) => handleRemoveProduct(markets.length - 1 - index, productIndex)}
+              onQuantityChange={(productIndex, newQuantity) => handleQuantityChange(markets.length - 1 - index, productIndex, newQuantity)}
             />
           ))}
         </div>
-
-        {showNewMarketForm && (
-          <NewMarketForm
-            onConfirm={handleAddMarket}
-            onCancel={() => setShowNewMarketForm(false)}
-            participants={participants}
-          />
-        )}
 
         {markets.length > 0 && (
           <CountSection
