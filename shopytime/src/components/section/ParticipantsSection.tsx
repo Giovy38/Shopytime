@@ -1,11 +1,19 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { Tag } from "../Tag";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export function ParticipantSection() {
+interface ParticipantSectionProps {
+    onParticipantsChange: (participants: string[]) => void;
+}
+
+export function ParticipantSection({ onParticipantsChange }: ParticipantSectionProps) {
     const [participants, setParticipants] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        onParticipantsChange(participants);
+    }, [participants, onParticipantsChange]);
 
     const onAddParticipant = () => {
         if (inputValue.trim()) {
