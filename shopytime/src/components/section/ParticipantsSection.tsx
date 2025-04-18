@@ -72,11 +72,11 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
                     )}
                 </div>
                 {showWarning ? (
-                    <div className="text-center h-8 text-red-500 font-bold">
+                    <div className="text-center h-15 md:h-8 text-red-500 font-bold">
                         {warningMessage}
                     </div>
                 ) : (
-                    <div className="h-8">
+                    <div className="md:h-8 h-15">
 
                     </div>
                 )}
