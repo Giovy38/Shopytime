@@ -1,8 +1,11 @@
+import { RiCloseLargeFill } from "react-icons/ri";
+
+
 export function Tag({
-    // color,
     children,
+    onRemove,
 }: React.HTMLAttributes<HTMLDivElement> & {
-    color?: "yellow" | "green" | "blue" | "red" | "purple"
+    onRemove?: () => void;
 }) {
 
 
@@ -15,6 +18,9 @@ export function Tag({
             >
                 <div className="w-2 h-2 bg-default-secondary rounded-full"></div>
                 {children}
+                <div className="cursor-pointer text-sm" onClick={onRemove}>
+                    <RiCloseLargeFill />
+                </div>
             </div>
         </div>
     )

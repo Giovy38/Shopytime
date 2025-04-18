@@ -2,6 +2,7 @@ export function Button({
     className,
     variant,
     children,
+    onClick,
     ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "outline"
@@ -23,6 +24,7 @@ export function Button({
         <div className="relative inline-block">
             <div className="absolute inset-0 translate-x-1 translate-y-1 bg-default-secondary" />
             <button
+                onClick={onClick}
                 className={`relative px-4 py-3 font-bold border-2 cursor-pointer border-default-secondary transition-transform active:translate-x-0.5 active:translate-y-0.5 ${getVariantClasses()} ${className || ''}`}
                 {...props}
             >
