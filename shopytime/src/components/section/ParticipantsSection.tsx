@@ -5,11 +5,14 @@ import { useState, useEffect } from "react";
 
 interface ParticipantSectionProps {
     onParticipantsChange: (participants: string[]) => void;
+    assignedBuyers: string[];
 }
 
-export function ParticipantSection({ onParticipantsChange }: ParticipantSectionProps) {
+export function ParticipantSection({ onParticipantsChange, assignedBuyers }: ParticipantSectionProps) {
     const [participants, setParticipants] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState("");
+    const [showWarning, setShowWarning] = useState(false);
+    const [warningMessage, setWarningMessage] = useState("");
 
     useEffect(() => {
         onParticipantsChange(participants);
@@ -21,6 +24,18 @@ export function ParticipantSection({ onParticipantsChange }: ParticipantSectionP
             setInputValue("");
         }
     }
+
+    const handleRemoveParticipant = (index: number) => {
+        const participantToRemove = participants[index];
+        if (assignedBuyers.includes(participantToRemove)) {
+            const capitalizedName = participantToRemove.charAt(0).toUpperCase() + participantToRemove.slice(1);
+            setWarningMessage(`Non puoi cancellare ${capitalizedName} perché è assegnato ad un negozio`);
+            setShowWarning(true);
+            setTimeout(() => setShowWarning(false), 3000);
+            return;
+        }
+        setParticipants(participants.filter((_, i) => i !== index));
+    };
 
     return (
         <div className="relative">
@@ -41,15 +56,22 @@ export function ParticipantSection({ onParticipantsChange }: ParticipantSectionP
                         participants.map((participant, index) => (
                             <Tag
                                 key={index}
-                                onRemove={() => {
-                                    setParticipants(participants.filter((_, i) => i !== index));
-                                }}
+                                onRemove={() => handleRemoveParticipant(index)}
                             >
                                 {participant}
                             </Tag>
                         ))
                     )}
                 </div>
+                {showWarning ? (
+                    <div className="text-center h-8 text-red-500 font-bold">
+                        {warningMessage}
+                    </div>
+                ) : (
+                    <div className="h-8">
+
+                    </div>
+                )}
             </div>
         </div>
     )

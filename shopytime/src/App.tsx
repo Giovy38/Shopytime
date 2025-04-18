@@ -35,11 +35,18 @@ function App() {
     setParticipants(newParticipants);
   };
 
+  const getAssignedBuyers = () => {
+    return markets.map(market => market.buyerName);
+  };
+
   return (
     <>
       <Navbar />
       <div className='flex flex-col gap-5 p-3'>
-        <ParticipantSection onParticipantsChange={handleParticipantsChange} />
+        <ParticipantSection
+          onParticipantsChange={handleParticipantsChange}
+          assignedBuyers={getAssignedBuyers()}
+        />
 
         <div className="flex flex-col gap-5">
           {participants.length >= 2 && (
