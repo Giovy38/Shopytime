@@ -5,6 +5,7 @@ import { PiMoneyFill } from "react-icons/pi";
 import { Button } from "./Button";
 import { useState } from "react";
 import { MarketNameTag } from "./MarketNameTag";
+import { NameTag } from "./NameTag";
 
 export function TotalCard({
     name,
@@ -55,8 +56,10 @@ export function TotalCard({
     return (
         <div className="relative">
             <div className="absolute inset-0 translate-x-1 translate-y-1 bg-black " />
-            <div className={`${isPaid ? 'bg-default-third-disabled' : 'bg-default-third'} relative p-5  border-2 border-black min-h-82 md:min-h-70`}>
-                <h3 className="text-xl font-bold mb-2 capitalize">{name}</h3>
+            <div className={`${isPaid ? 'bg-default-third-disabled' : 'bg-default-third'} relative p-5 border-2 border-black min-h-82 md:min-h-70`}>
+                <div className="pb-3">
+                    <NameTag>{name}</NameTag>
+                </div>
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between bg-primary-color px-2">
                         <span className="font-medium">Speso:</span>

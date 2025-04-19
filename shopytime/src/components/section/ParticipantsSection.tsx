@@ -13,9 +13,15 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
     const [inputValue, setInputValue] = useState("");
     const [showWarning, setShowWarning] = useState(false);
     const [warningMessage, setWarningMessage] = useState("");
+    const [showInfo, setShowInfo] = useState(true);
 
     useEffect(() => {
         onParticipantsChange(participants);
+        if (participants.length >= 2) {
+            setShowInfo(false);
+        } else {
+            setShowInfo(true);
+        }
     }, [participants, onParticipantsChange]);
 
     const onAddParticipant = () => {
@@ -51,7 +57,7 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
             <div className="relative p-2 bg-default-third border-2 border-default-secondary">
                 <div className='p-3 flex flex-col md:flex-row justify-center items-center gap-5'>
                     <Input
-                        placeholder='Inserisci un nome da aggiungere'
+                        placeholder='Inserisci un nome'
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                     />
@@ -75,10 +81,12 @@ export function ParticipantSection({ onParticipantsChange, assignedBuyers }: Par
                     <div className="text-center h-15 md:h-8 text-red-500 font-bold">
                         {warningMessage}
                     </div>
-                ) : (
-                    <div className="md:h-8 h-15">
-
+                ) : showInfo ? (
+                    <div className="text-center h-15 md:h-8 text-red-500 font-bold">
+                        Aggiungi almeno 2 partecipanti per proseguire
                     </div>
+                ) : (
+                    <div className="md:h-8 h-15"></div>
                 )}
             </div>
         </div>
