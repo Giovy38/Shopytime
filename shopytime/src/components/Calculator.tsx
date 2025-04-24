@@ -11,7 +11,7 @@ interface CalculatorWidgetProps {
 }
 
 export function CalculatorWidget({ initialValue = 0, onClose, onResult, isStandalone = true }: CalculatorWidgetProps) {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const [display, setDisplay] = useState(initialValue.toString())
     const [firstOperand, setFirstOperand] = useState<number | null>(null)
     const [operator, setOperator] = useState<string | null>(null)
