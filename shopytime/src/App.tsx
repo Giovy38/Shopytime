@@ -8,6 +8,7 @@ import { NewMarketForm } from './components/NewMarketForm'
 import { CountSection } from './components/section/CountSection'
 import { Selector } from './components/Selector';
 import { SeparateBillSection } from './components/section/SeparateBillSection';
+import { CalculatorWidget } from './components/Calculator';
 
 interface Market {
   name: string;
@@ -129,6 +130,9 @@ function App() {
             <SeparateBillSection participants={participants} />
           )
         )}
+      </div>
+      <div>
+        <CalculatorWidget />
       </div>
     </>
   )
